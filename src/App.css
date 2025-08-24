@@ -1,0 +1,105 @@
+
+/* header */
+#headerimgdiv {
+    width: 60px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#headerimgdiv:hover {
+    width: 65px;
+    height: 50px;
+    box-shadow: 0px 0px 15px white;
+
+}
+
+#navbar {
+    height: 100px;
+}
+
+/* homepage */
+
+#homesection {
+    height: 90vh;
+    background-image: url(https://wallpaperaccess.com/full/5882802.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+#heading1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#heading2 {
+    font-weight: bold;
+}
+
+#addimagebtn:hover {
+    height: 50px;
+    width: 60px;
+    background-color: rgb(211, 22, 22);
+    transition-duration: .2s;
+
+}
+
+#noimageheading {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.cardimage:hover {
+    box-shadow: 0px 0px 20px red;
+}
+
+/* footer */
+.footerlogos {
+    font-size: 30px;
+    height: 50px;
+    width: 30px;
+}
+
+.footerlogos:hover {
+    font-size: 40px;
+}
+
+/* page not found */
+#pnfheading1 {
+    font-size: 100px;
+    font-weight: bold;
+}
+
+#pnfheading2 {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/* media queries */
+@media screen and (max-width:575px) {
+    #navbar {
+        height: 80px;
+    }
+
+    #heading1 {
+        font-size: 25px;
+    }
+
+    #pnfheading1 {
+        font-size: 80px;
+    }
+
+    #pnfheading2 {
+        font-size: 16px;
+    }
+
+    #noimageheading {
+        font-size: 30px;
+
+    }
+}
