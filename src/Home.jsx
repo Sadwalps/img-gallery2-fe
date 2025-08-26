@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,8 +7,11 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Displayimages from './Displayimages';
+import { addImageAPI, getImageAPI } from './service/allApi';
 function Home() {
     const [show, setShow] = useState(false);
+    const [images,setImages] =useState([])
+    
 
     const [imgdeatils, setImgdeatils] = useState({
         title: "",
@@ -23,21 +26,38 @@ function Home() {
         })
     }
 
-    const handleAdd = () => {
+    const handleAdd = async() => {
         const { title, url } = imgdeatils
         console.log(title, url);
         if(!title || !url){
             alert(`Fill the form completely`)
         }else{
-             alert(`success`)
+           const result = await addImageAPI({title,url})
+           console.log(result);
+           if(result.status>=200 && result.status<300){
+             alert(`Image successfully added`)
+             handleClose()
+           } 
         }
     }
 
-
+    const getImage = async()=>{
+        const result = await getImageAPI()
+        console.log(result);
+         if(result.status>=200 && result.status<300){
+            setImages(result.data)
+         }
+    }
+    console.log(images);
+    
     const handleClose = () => {
         setShow(false);
         handleCancel()
     }
+
+    useEffect(()=>{
+        getImage()
+    },[])
 
     const handleShow = () => setShow(true);
     return (
@@ -78,22 +98,14 @@ function Home() {
             </div>
 
             {/*images's section */}
-            <div className=' container-fluid pt-4 pb-4'>
+           {images?.length>0 ?<div className=' container-fluid pt-4 pb-4'>
                 <div className="row">
-                    <div className="col-lg-3 col-6 p-2">
-                        <Displayimages />
-                    </div>
-                    <div className="col-lg-3 col-6 p-2">
-
-                    </div>
-                    <div className="col-lg-3 col-6 p-2">
-
-                    </div>
-                    <div className="col-lg-3 col-6 p-2">
-
-                    </div>
+                    {images?.map((item)=>(<div className="col-lg-3 col-6 p-2">
+                        <Displayimages allimage={item}  />
+                    </div>))}
+                    
                 </div>
-            </div>
+            </div>:
 
             <div className='container-fluid bg-danger' >
                 <div className="row">
@@ -103,7 +115,7 @@ function Home() {
                     </div>
                     <div className="col-3-md"></div>
                 </div>
-            </div>
+            </div>}
 
             <Footer />
         </>
